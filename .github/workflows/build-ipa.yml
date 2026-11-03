@@ -1,48 +1,38 @@
-name: Build (no code signing)
-env:
-IL2CPP_ADDITIONAL_ARGS: '--compiler-flags="-fbracket-depth=2048"'
-run:
+WORKSPACE=/Path/To/Your/Unity/Project
+PROJECT_NAME=YourUnityProjectName
 
-on:
-  workflow_dispatch:
+# suppose Builder.cs has BuildXcodeProject method
+/Applications/Unity/Unity.app/Contents/MacOS/Unity -projectPath $WORKSPACE -quit -batchmode -executeMethod Builder.BuildXcodeProject
 
-jobs:
-  build:
-    runs-on: macos-14
-    timeout-minutes: 90
-    steps:
-      - name: Checkout (with LFS files)
-        uses: actions/checkout@v4
-        with:
-          lfs: true
+XCODE_WORKSPACE_CONFIG_PATH=$PROJECT_NAME/Unity-iPhone.xcworkspace
+SCHEME=Unity-iPhone
+CONFIGURATION=Release
 
-      - name: Show Xcode version
-        run: xcodebuild -version
+CODE_SIGN_IDENTITY="Your Code Sign Identity Name (ex. iOS Development: Xxxxx)"
+PROVISIONING_PROFILE="Your Provisioning Profile Name (ex. iOSTeam Provisioning Profile: Xxxxx)"
 
-      - name: Build (no code signing)
-        run: |
-          xcodebuild \
-            -project Unity-iPhone.xcodeproj \
-            -scheme Unity-iPhone \
-            -configuration Release \
-            -sdk iphoneos \
-            -destination 'generic/platform=iOS' \
-            -derivedDataPath build \
-            CODE_SIGNING_ALLOWED=NO \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGN_IDENTITY="" \
-            build
+ARCHIVE_FILE_PATH=$WORKSPACE/$PROJECT_NAME.xcarchive
+IPA_FILE_PATH=$WORKSPACE/$PROJECT_NAME.ipa
 
-      - name: Package IPA
-        run: |
-          APP_PATH=$(find build/Build/Products -maxdepth 2 -name "*.app" | head -n 1)
-          echo "Found app: $APP_PATH"
-          mkdir Payload
-          cp -R "$APP_PATH" Payload/
-          zip -qry StumbleOffline.ipa Payload
+# clean
+rm -rf "${ARCHIVE_FILE_PATH}"
+rm -rf "${IPA_FILE_PATH}"
 
-      - name: Upload IPA
-        uses: actions/upload-artifact@v4
-        with:
-          name: StumbleOffline-ipa
-          path: StumbleOffline.ipa
+# build archive
+BUILD_OPTIONS="DEBUG_INFORMATION_FORMAT=dwarf"
+xcodebuild -workspace "${XCODE_WORKSPACE_CONFIG_PATH}" -scheme "${SCHEME}" -configuration "${CONFIGURATION}" CODE_SIGN_IDENTITY="${CODE_SIGN_IDENTITY}" archive -archivePath "${ARCHIVE_FILE_PATH}" "${BUILD_OPTIONS}"
+
+EXIT_CODE=$?
+if [ $EXIT_CODE -ne 0 ]; then
+  cat "failed to build app file"
+  exit $EXIT_CODE
+fi
+
+# build ipa
+xcodebuild -exportArchive -exportFormat ipa -archivePath "${ARCHIVE_FILE_PATH}" -exportPath "${IPA_FILE_PATH}" -exportProvisioningProfile "${PROVISIONING_PROFILE}"
+
+EXIT_CODE=$?
+if [ $EXIT_CODE -ne 0 ]; then
+  cat "failed to build ipa file"
+  exit $EXIT_CODE
+fi
