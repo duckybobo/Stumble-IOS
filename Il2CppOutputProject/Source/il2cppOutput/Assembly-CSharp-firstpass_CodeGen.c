@@ -1,0 +1,119 @@
+﻿#include "pch-c.h"
+#ifndef _MSC_VER
+# include <alloca.h>
+#else
+# include <malloc.h>
+#endif
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+extern void BackboneClientOnInitializeEvent__ctor_m8B668D5384F0CD757FAD1E87A3436D66B56DA0C0 (void);
+extern void BackboneClientOnLoginEvent__ctor_m26E333BDC4197887E035CBD8AE2D6FA5FD37A901 (void);
+extern void BackboneClientOnLogoutEvent__ctor_m0C05F3D92D275A4E258FFA091FDD774C64F61F6F (void);
+extern void BackboneManager_get_Instance_mE437505254DDA7CAAC3B7AC437CDA719D45A6A5A (void);
+extern void BackboneManager_get_Client_m6D66007CD5ED33C9A427309B124E6BD601795496 (void);
+extern void BackboneManager_get_IsInitialized_mBF7BCF3EDE5E0908CFDE77945ED69AA5AA9E0901 (void);
+extern void BackboneManager_get_IsUserLoggedIn_mF383ED148C9C2BC8F61834DC5E9C815B4E04D74E (void);
+extern void BackboneManager_Awake_mBE96B83A0B5377E4BFE06E61F77485742972BC0F (void);
+extern void BackboneManager_Start_m796231C72380F1E56736C85EBDA21B7724CFFCDC (void);
+extern void BackboneManager_LogError_m346408B2CAFF330B4052C0B38438EC99E47A7FFD (void);
+extern void BackboneManager_Initialize_m7F47B2AB8D0B973C764A01D80442BA2718D86901 (void);
+extern void BackboneManager_Initialize_mA29AEB1C61C4C726C1E4C9843390355EA4925C4F (void);
+extern void BackboneManager_InitializeRoutine_m4C6A2EC1734878D204DA82F5F853F32A1CA123D5 (void);
+extern void BackboneManager_OnHttpError_m942F7A2567CA2507B0B1EDFED18B96AFD882050C (void);
+extern void BackboneManager_OnInitialize_mABC30A4A09C269DF94526D63F38D5DD1C335CE88 (void);
+extern void BackboneManager_OnLogin_m28D5274D464AF5F069A17713410681896749C19E (void);
+extern void BackboneManager_OnLogout_m9D9C8F5A25F82793234990CBACFC540D6E502E76 (void);
+extern void BackboneManager__ctor_m6CC59A628E977C78A9234F4821CBE43E87C5BF6D (void);
+extern void U3CInitializeRoutineU3Ed__21__ctor_m59D8C244247EB4CBC23C6B4092A5BE2771C41908 (void);
+extern void U3CInitializeRoutineU3Ed__21_System_IDisposable_Dispose_mB81F02F64B76136E6460ED7FBDD14B290D1FCFDB (void);
+extern void U3CInitializeRoutineU3Ed__21_MoveNext_mDAE82A3C5BFAEAB6CE35BC21785724948CB2ACA4 (void);
+extern void U3CInitializeRoutineU3Ed__21_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mFBFB6042D59CAC471D99303F3E8C881187FB6E2C (void);
+extern void U3CInitializeRoutineU3Ed__21_System_Collections_IEnumerator_Reset_m6C01B24AF718972C0DC9985F4E572230275FCA87 (void);
+extern void U3CInitializeRoutineU3Ed__21_System_Collections_IEnumerator_get_Current_mFA6A0CF479CA825FD97510E8CBEEDE73462439E8 (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_mC7CA174A23290C34424DF6D2733D5E64B92E5977 (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_m3C9D09F94200334DD5FA29A465481C7848AF4549 (void);
+static Il2CppMethodPointer s_methodPointers[26] = 
+{
+	BackboneClientOnInitializeEvent__ctor_m8B668D5384F0CD757FAD1E87A3436D66B56DA0C0,
+	BackboneClientOnLoginEvent__ctor_m26E333BDC4197887E035CBD8AE2D6FA5FD37A901,
+	BackboneClientOnLogoutEvent__ctor_m0C05F3D92D275A4E258FFA091FDD774C64F61F6F,
+	BackboneManager_get_Instance_mE437505254DDA7CAAC3B7AC437CDA719D45A6A5A,
+	BackboneManager_get_Client_m6D66007CD5ED33C9A427309B124E6BD601795496,
+	BackboneManager_get_IsInitialized_mBF7BCF3EDE5E0908CFDE77945ED69AA5AA9E0901,
+	BackboneManager_get_IsUserLoggedIn_mF383ED148C9C2BC8F61834DC5E9C815B4E04D74E,
+	BackboneManager_Awake_mBE96B83A0B5377E4BFE06E61F77485742972BC0F,
+	BackboneManager_Start_m796231C72380F1E56736C85EBDA21B7724CFFCDC,
+	BackboneManager_LogError_m346408B2CAFF330B4052C0B38438EC99E47A7FFD,
+	BackboneManager_Initialize_m7F47B2AB8D0B973C764A01D80442BA2718D86901,
+	BackboneManager_Initialize_mA29AEB1C61C4C726C1E4C9843390355EA4925C4F,
+	BackboneManager_InitializeRoutine_m4C6A2EC1734878D204DA82F5F853F32A1CA123D5,
+	BackboneManager_OnHttpError_m942F7A2567CA2507B0B1EDFED18B96AFD882050C,
+	BackboneManager_OnInitialize_mABC30A4A09C269DF94526D63F38D5DD1C335CE88,
+	BackboneManager_OnLogin_m28D5274D464AF5F069A17713410681896749C19E,
+	BackboneManager_OnLogout_m9D9C8F5A25F82793234990CBACFC540D6E502E76,
+	BackboneManager__ctor_m6CC59A628E977C78A9234F4821CBE43E87C5BF6D,
+	U3CInitializeRoutineU3Ed__21__ctor_m59D8C244247EB4CBC23C6B4092A5BE2771C41908,
+	U3CInitializeRoutineU3Ed__21_System_IDisposable_Dispose_mB81F02F64B76136E6460ED7FBDD14B290D1FCFDB,
+	U3CInitializeRoutineU3Ed__21_MoveNext_mDAE82A3C5BFAEAB6CE35BC21785724948CB2ACA4,
+	U3CInitializeRoutineU3Ed__21_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mFBFB6042D59CAC471D99303F3E8C881187FB6E2C,
+	U3CInitializeRoutineU3Ed__21_System_Collections_IEnumerator_Reset_m6C01B24AF718972C0DC9985F4E572230275FCA87,
+	U3CInitializeRoutineU3Ed__21_System_Collections_IEnumerator_get_Current_mFA6A0CF479CA825FD97510E8CBEEDE73462439E8,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_mC7CA174A23290C34424DF6D2733D5E64B92E5977,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_m3C9D09F94200334DD5FA29A465481C7848AF4549,
+};
+static const int32_t s_InvokerIndices[26] = 
+{
+	7641,
+	7641,
+	7641,
+	11029,
+	11029,
+	10999,
+	10999,
+	7641,
+	7641,
+	6073,
+	11029,
+	10698,
+	10698,
+	6073,
+	6073,
+	5955,
+	7641,
+	7641,
+	6033,
+	7641,
+	7410,
+	7522,
+	7641,
+	7522,
+	11073,
+	7641,
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharpU2Dfirstpass_CodeGenModule;
+const Il2CppCodeGenModule g_AssemblyU2DCSharpU2Dfirstpass_CodeGenModule = 
+{
+	"Assembly-CSharp-firstpass.dll",
+	26,
+	s_methodPointers,
+	0,
+	NULL,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+};
