@@ -1,51 +1,53 @@
-name: Build Unity iOS Unsigned IPA
+name: Build unsigned IPA
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
-  build-unity-ios:
-    name: Build Unity Project for iOS
-    runs-on: macos-latest
+  build:
+    runs-on: macos-14
+    timeout-minutes: 120
     steps:
-      - name: Checkout code
+      - name: Checkout (with LFS files)
         uses: actions/checkout@v4
-
-      - name: Setup Unity License Activation
-        uses: game-ci/unity-request-activation@v2
         with:
-          username: ${{ secrets.UNITY_USERNAME }}
-          password: ${{ secrets.UNITY_PASSWORD }}
-          serial: ${{ secrets.UNITY_SERIAL }} # Required if using Unity Pro
+          lfs: true
 
-      - name: Build Unity Project (iOS)
-        uses: game-ci/unity-builder@v4
-        with:
-          targetPlatform: iOS
-          # Add custom build script method if needed via custom parameters
+      - name: Show Xcode version
+        run: xcodebuild -version
 
-      - name: Build Xcode Project to Unsigned IPA
+      - name: Raise clang bracket depth for IL2CPP
         run: |
-          cd Build/iOS # Adjust to your Unity Xcode output path
-          xcodebuild -project Unity-iPhone.xcodeproj \
+          echo "IL2CPP commands found before patch:"
+          grep -c -- "--compile-cpp" Unity-iPhone.xcodeproj/project.pbxproj || true
+          sed -i '' 's/--compile-cpp/--compile-cpp --compiler-flags=-fbracket-depth=2048/g' Unity-iPhone.xcodeproj/project.pbxproj
+          echo "Patched lines after:"
+          grep -c -- "fbracket-depth" Unity-iPhone.xcodeproj/project.pbxproj || true
+
+      - name: Build (no code signing)
+        run: |
+          xcodebuild \
+            -project Unity-iPhone.xcodeproj \
             -scheme Unity-iPhone \
             -configuration Release \
             -sdk iphoneos \
-            -destination generic/platform=iOS \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
-            archive -archivePath build.xcarchive
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build
 
-          xcodebuild -exportArchive \
-            -archivePath build.xcarchive \
-            -exportOptionsPlist ExportOptionsUnsigned.plist \
-            -exportPath ./unsigned-ipa
+      - name: Package IPA
+        run: |
+          APP_PATH=$(find build/Build/Products -maxdepth 2 -name "*.app" | head -n 1)
+          echo "Found app: $APP_PATH"
+          mkdir Payload
+          cp -R "$APP_PATH" Payload/
+          zip -qry StumbleOffline.ipa Payload
 
-      - name: Upload Unsigned IPA Artifact
+      - name: Upload IPA
         uses: actions/upload-artifact@v4
         with:
-          name: unsigned-ios-ipa
-          path: unsigned-ipa/*.ipa
+          name: StumbleOffline-ipa
+          path: StumbleOffline.ipa
