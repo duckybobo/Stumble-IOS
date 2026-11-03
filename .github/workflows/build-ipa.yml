@@ -2,8 +2,7 @@ name: Build (no code signing)
 env:
 IL2CPP_ADDITIONAL_ARGS: '--compiler-flags="-fbracket-depth=2048"'
 run:
-xcodebuild \
- -project Unity-iPhone.xcodeproj \
+
 on:
   workflow_dispatch:
 
