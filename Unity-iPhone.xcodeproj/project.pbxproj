@@ -605,6 +605,7 @@
 		E63E22A2D76ACB6254C3A017 /* mscorlib__13.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = mscorlib__13.cpp; path = Il2CppOutputProject/Source/il2cppOutput/mscorlib__13.cpp; sourceTree = SOURCE_ROOT; };
 		E6A068D0AE38570B96122437 /* Assembly-CSharp__10.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "Assembly-CSharp__10.cpp"; path = "Il2CppOutputProject/Source/il2cppOutput/Assembly-CSharp__10.cpp"; sourceTree = SOURCE_ROOT; };
 		E6DD1EF92C698A076367A202 /* Generics__40.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Generics__40.cpp; path = Il2CppOutputProject/Source/il2cppOutput/Generics__40.cpp; sourceTree = SOURCE_ROOT; };
+		E79F4C19A708A497C9443FB8 /* Assembly-CSharp__20.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "Assembly-CSharp__20.cpp"; path = "Il2CppOutputProject/Source/il2cppOutput/Assembly-CSharp__20.cpp"; sourceTree = SOURCE_ROOT; };
 		E8A3C67A913D9E240397EFB1 /* UnityEngine.UIElementsModule__4.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = UnityEngine.UIElementsModule__4.cpp; path = Il2CppOutputProject/Source/il2cppOutput/UnityEngine.UIElementsModule__4.cpp; sourceTree = SOURCE_ROOT; };
 		EA841D12341C9363E02EE00F /* Unity.TextMeshPro__4.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Unity.TextMeshPro__4.cpp; path = Il2CppOutputProject/Source/il2cppOutput/Unity.TextMeshPro__4.cpp; sourceTree = SOURCE_ROOT; };
 		EAFCEA713D2A37FF5D81C6CB /* mscorlib__9.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = mscorlib__9.cpp; path = Il2CppOutputProject/Source/il2cppOutput/mscorlib__9.cpp; sourceTree = SOURCE_ROOT; };
@@ -798,6 +799,7 @@
 				1F951416510E376441DD5ABD /* Assembly-CSharp__18.cpp */,
 				17A88A24B72C4E31367418A7 /* Assembly-CSharp__19.cpp */,
 				0625BA89AA0F71807DF4285A /* Assembly-CSharp__2.cpp */,
+				E79F4C19A708A497C9443FB8 /* Assembly-CSharp__20.cpp */,
 				3BF0F548641EA67234EF4822 /* Assembly-CSharp__3.cpp */,
 				4F97D266790DB44CD01959EC /* Assembly-CSharp__4.cpp */,
 				A34734E12320BFE93D77614B /* Assembly-CSharp__5.cpp */,
