@@ -1,0 +1,56 @@
+name: Build unsigned IPA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14
+    timeout-minutes: 120
+    steps:
+      - name: Checkout (with LFS files)
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Enable file sharing (Files app)
+        run: |
+          PLIST=$(find . -maxdepth 2 -name Info.plist | head -n 1)
+          echo "Using plist: $PLIST"
+          /usr/libexec/PlistBuddy -c "Add :UIFileSharingEnabled bool true" "$PLIST" || /usr/libexec/PlistBuddy -c "Set :UIFileSharingEnabled true" "$PLIST"
+          /usr/libexec/PlistBuddy -c "Add :LSSupportsOpeningDocumentsInPlace bool true" "$PLIST" || /usr/libexec/PlistBuddy -c "Set :LSSupportsOpeningDocumentsInPlace true" "$PLIST"
+
+      - name: Raise clang bracket depth for IL2CPP
+        run: |
+          sed -i '' 's/--compile-cpp/--compile-cpp --compiler-flags=-fbracket-depth=2048/g' Unity-iPhone.xcodeproj/project.pbxproj
+
+      - name: Build (no code signing)
+        run: |
+          xcodebuild \
+            -project Unity-iPhone.xcodeproj \
+            -scheme Unity-iPhone \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build
+
+      - name: Package IPA
+        run: |
+          APP_PATH=$(find build/Build/Products -maxdepth 2 -name "*.app" | head -n 1)
+          echo "Found app: $APP_PATH"
+          mkdir Payload
+          cp -R "$APP_PATH" Payload/
+          zip -qry StumbleOffline.ipa Payload
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: StumbleOffline-ipa
+          path: StumbleOffline.ipa
